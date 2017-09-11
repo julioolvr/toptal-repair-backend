@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911160441) do
+ActiveRecord::Schema.define(version: 20170911164348) do
 
   create_table "repairs", force: :cascade do |t|
     t.string "title"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20170911160441) do
     t.boolean "is_approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "assignee_id"
+    t.index ["assignee_id"], name: "index_repairs_on_assignee_id"
   end
 
   create_table "users", force: :cascade do |t|

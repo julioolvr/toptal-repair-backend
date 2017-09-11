@@ -1,6 +1,7 @@
 class Repair < ApplicationRecord
   validates :datetime, presence: true
   validate :cannot_overlap_with_other_repair
+  belongs_to :assignee, class_name: 'User', optional: true
 
   private
 
