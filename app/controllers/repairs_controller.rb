@@ -9,7 +9,7 @@ class RepairsController < ApplicationController
   end
 
   def create
-    render json: Repair.create(repair_params)
+    render json: Repair.create!(repair_params)
   end
 
   def update

@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170910232344) do
+ActiveRecord::Schema.define(version: 20170911160441) do
 
   create_table "repairs", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.datetime "datetime"
+    t.datetime "datetime", null: false
     t.boolean "is_complete", default: false
     t.boolean "is_approved", default: false
     t.datetime "created_at", null: false
