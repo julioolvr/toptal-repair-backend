@@ -2,6 +2,7 @@ class Repair < ApplicationRecord
   validates :datetime, presence: true
   validate :cannot_overlap_with_other_repair
   belongs_to :assignee, class_name: 'User', optional: true
+  has_many :comments, class_name: 'RepairComment', dependent: :destroy, inverse_of: 'repair'
 
   private
 
