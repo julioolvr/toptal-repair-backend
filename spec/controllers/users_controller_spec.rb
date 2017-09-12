@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   describe 'GET #index' do
     it 'lists all users' do
-      ids = [User.create!(email: 'test@test.com', password: '123456').id]
+      ids = [create(:user).id]
       get :index
       expect(JSON.parse(response.body).map { |user_json| user_json['id'] }).to eq ids
     end
@@ -11,7 +11,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #show' do
     it 'returns a user' do
-      id = User.create!(email: 'test@test.com', password: '123456').id
+      id = create(:user).id
       get :show, params: { id: id }
       expect(JSON.parse(response.body)['id']).to eq id
     end
@@ -27,7 +27,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'PATCH #update' do
     it 'updates a user' do
-      id = User.create!(email: 'test@test.com', password: '123456').id
+      id = create(:user).id
       expect do
         patch :update, params: { id: id, user: { email: 'new@email.com' } }
       end.to(change { User.find(id).email })
@@ -36,7 +36,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'deletes a user' do
-      id = User.create!(email: 'test@test.com', password: '123456').id
+      id = create(:user).id
       expect do
         delete :destroy, params: { id: id }
       end.to change { User.count }.from(1).to(0)

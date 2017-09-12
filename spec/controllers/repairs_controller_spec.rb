@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe RepairsController, type: :controller do
-  # TODO: Use factory_girl
   describe 'GET #index' do
     it 'returns all repairs' do
-      ids = [Repair.create(datetime: Time.now).id]
+      ids = [create(:repair).id]
       get :index
       expect(JSON.parse(response.body).map { |repair_json| repair_json['id'] }).to eq ids
     end
@@ -12,7 +11,7 @@ RSpec.describe RepairsController, type: :controller do
 
   describe 'GET #show' do
     it 'returns a repair' do
-      id = Repair.create(datetime: Time.now).id
+      id = create(:repair).id
       get :show, params: { id: id }
       expect(JSON.parse(response.body)['id']).to eq id
     end
@@ -28,7 +27,7 @@ RSpec.describe RepairsController, type: :controller do
 
   describe 'PATCH #update' do
     it 'updates a repair' do
-      id = Repair.create(datetime: Time.now).id
+      id = create(:repair).id
       expect do
         patch :update, params: { id: id, repair: { title: 'Updated title' } }
       end.to(change { Repair.find(id).title })
@@ -37,7 +36,7 @@ RSpec.describe RepairsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'deletes a repair' do
-      id = Repair.create(datetime: Time.now).id
+      id = create(:repair).id
       expect do
         delete :destroy, params: { id: id }
       end.to change { Repair.count }.from(1).to(0)
