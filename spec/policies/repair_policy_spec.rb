@@ -6,8 +6,13 @@ RSpec.describe RepairPolicy do
   let(:user) { create(:user) }
   let(:manager) { create(:user, :manager) }
 
-  permissions :show?, :update? do
-    it { should permit(user, create(:repair)) }
+  permissions :show? do
+    it { should permit(user, create(:repair, assignee: user)) }
+    it { should permit(manager, create(:repair)) }
+  end
+
+  permissions :update? do
+    it { should permit(user, create(:repair, assignee: user)) }
     it { should permit(manager, create(:repair)) }
   end
 

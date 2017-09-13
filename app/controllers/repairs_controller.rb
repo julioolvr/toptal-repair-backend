@@ -3,7 +3,7 @@ class RepairsController < ApplicationController
   after_action :verify_authorized, except: :index
 
   def index
-    render json: Repair.all
+    render json: policy_scope(Repair)
   end
 
   def show

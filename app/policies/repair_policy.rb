@@ -9,10 +9,20 @@ class RepairPolicy < ApplicationPolicy
   end
 
   def update?
-    true
+    user.manager? || show?
   end
 
   def destroy?
     user.manager?
+  end
+
+  class Scope < Scope
+    def resolve
+      if user.manager?
+        scope.all
+      else
+        scope.where(assignee: user)
+      end
+    end
   end
 end
